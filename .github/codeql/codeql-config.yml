@@ -1,0 +1,19 @@
+# Copyright 2026 ALTESSA SOLUTIONS INC.
+# Use of this source code is governed by an MIT-style license that can be
+# found in the LICENSE file.
+
+# What the CodeQL job fails on: the security queries, and none of the quality
+# ones.
+name: snspd CodeQL
+queries:
+  - uses: security-extended
+query-filters:
+  # `spddump` and the test programs open the files named on their command
+  # lines; that is what they are for. The library itself takes bytes and opens
+  # no file, so the rule has nothing else to find here.
+  - exclude:
+      id: cpp/path-injection
+  # The same programs create their output with fopen, so the file mode follows
+  # the user's umask as for any command-line tool.
+  - exclude:
+      id: cpp/world-writable-file-creation

@@ -1,0 +1,9 @@
+/build*/
+/stage*/
+/corpus/
+/crash-*
+/leak-*
+/timeout-*
+/oom-*
+/slow-unit-*
+__pycache__/
